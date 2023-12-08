@@ -20,7 +20,7 @@ class MainScreen extends StatelessWidget {
           } else if (state.bottomTab == BottomTab.appointementList) {
             return const AppointmentListPage();
           } else if (state.bottomTab == BottomTab.tutorial) {
-            return OnbordingPage();
+            return OnboardingPage();
           }
           return Container();
         },

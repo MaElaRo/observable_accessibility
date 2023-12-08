@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
-class OnbordingPageView extends StatelessWidget {
-  const OnbordingPageView({
+class OnboardingPageView extends StatelessWidget {
+  const OnboardingPageView({
     super.key,
     required this.svg,
     required this.title,
@@ -28,7 +28,7 @@ class OnbordingPageView extends StatelessWidget {
           const SizedBox(height: 20.0),
           // Title
           Text(
-            title,
+            title, textAlign: TextAlign.center,
             style: const TextStyle(
               fontSize: 24.0,
               fontWeight: FontWeight.bold,
