@@ -28,7 +28,7 @@ class OnboardingPageView extends StatelessWidget {
           const SizedBox(height: 20.0),
           // Title
           Text(
-            title,
+            title, textAlign: TextAlign.center,
             style: const TextStyle(
               fontSize: 24.0,
               fontWeight: FontWeight.bold,
