@@ -1,6 +1,5 @@
 import 'dart:math';
 
-
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -116,11 +115,12 @@ class _DateAndTimePickerState extends State<DateAndTimePicker> {
                 },
               ),
               const Text.rich(
-                 TextSpan(
-                  text: 'I accept the ', style:  TextStyle(
-                  fontSize: 16.0,
-                  color: Colors.black,
-                ),
+                TextSpan(
+                  text: 'I accept the ',
+                  style: TextStyle(
+                    fontSize: 16.0,
+                    color: Colors.black,
+                  ),
                   children: <TextSpan>[
                     TextSpan(
                       text: 'terms and conditions',
@@ -183,7 +183,10 @@ class _DateAndTimePickerState extends State<DateAndTimePicker> {
               if (state is AppointmentBookingInProgress) {
                 return const Center(child: CircularProgressIndicator());
               } else if (state is AppointmentBookingFailure) {
-                return Text(state.error);
+                return Semantics(
+                  liveRegion: true,
+                  child: Text(state.error),
+                );
               } else {
                 return const SizedBox();
               }
