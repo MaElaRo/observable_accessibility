@@ -2,10 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:observable_accessibility/features/onboarding/onboarding_images.dart';
 import 'package:observable_accessibility/features/onboarding/widgets/onbording_page_view.dart';
 
-class OnbordingPage extends StatelessWidget {
-  OnbordingPage({super.key});
+class OnboardingPage extends StatelessWidget {
+  OnboardingPage({super.key});
 
-  final List<Map<String, String>> onbordingText = [
+  final List<Map<String, String>> onboardingText = [
     {
       'title': 'Schedule an appointment',
       'subtitle': 'It is very easy to schedule an appointment',
@@ -40,12 +40,12 @@ class OnbordingPage extends StatelessWidget {
         title: const Text('Tutorial'),
       ),
       body: PageView.builder(
-        itemCount: onbordingText.length,
+        itemCount: onboardingText.length,
         itemBuilder: (context, index) {
-          return OnbordingPageView(
-            svg: onbordingText[index]['image'] ?? '',
-            title: onbordingText[index]['title'] ?? '',
-            subtitle: onbordingText[index]['subtitle'] ?? '',
+          return OnboardingPageView(
+            svg: onboardingText[index]['image'] ?? '',
+            title: onboardingText[index]['title'] ?? '',
+            subtitle: onboardingText[index]['subtitle'] ?? '',
           );
         },
       ),

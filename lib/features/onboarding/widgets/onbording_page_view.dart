@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
-class OnbordingPageView extends StatelessWidget {
-  const OnbordingPageView({
+class OnboardingPageView extends StatelessWidget {
+  const OnboardingPageView({
     super.key,
     required this.svg,
     required this.title,
