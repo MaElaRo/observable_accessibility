@@ -10,18 +10,20 @@ part 'navigation_state.dart';
 ///
 class NavigationCubit extends Cubit<NavigationState> {
   NavigationCubit()
-      : super(const NavigationState.tabSelected(BottomTab.addAppointement));
+      : super(
+    const NavigationState(BottomTab.addAppointement),
+  );
 
   void getNavBarItem(BottomTab navbarItem) {
     switch (navbarItem) {
       case BottomTab.addAppointement:
-        emit(const NavigationState.tabSelected(BottomTab.addAppointement));
+        emit(const NavigationState(BottomTab.addAppointement));
         break;
       case BottomTab.appointementList:
-        emit(const NavigationState.tabSelected(BottomTab.appointementList));
+        emit(const NavigationState(BottomTab.appointementList));
         break;
       case BottomTab.tutorial:
-        emit(const NavigationState.tabSelected(BottomTab.tutorial));
+        emit(const NavigationState(BottomTab.tutorial));
         break;
     }
   }
