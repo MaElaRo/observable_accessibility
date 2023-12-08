@@ -104,35 +104,37 @@ class _DateAndTimePickerState extends State<DateAndTimePicker> {
           },
         ),
         const SizedBox(height: 10),
-        Row(
-          children: [
-            Checkbox(
-              value: _isChecked,
-              onChanged: (bool? value) {
-                setState(() {
-                  _isChecked = value ?? false;
-                });
-              },
-            ),
-            RichText(
-              text: const TextSpan(
-                text: 'I accept the ', style:  TextStyle(
-                fontSize: 16.0,
-                color: Colors.black,
+        MergeSemantics(
+          child: Row(
+            children: [
+              Checkbox(
+                value: _isChecked,
+                onChanged: (bool? value) {
+                  setState(() {
+                    _isChecked = value ?? false;
+                  });
+                },
               ),
-                children: <TextSpan>[
-                  TextSpan(
-                    text: 'terms and conditions',
-                    style: TextStyle(
-                      fontSize: 16.0,
-                      color: Colors.blue,
-                      decoration: TextDecoration.underline,
+              const Text.rich(
+                 TextSpan(
+                  text: 'I accept the ', style:  TextStyle(
+                  fontSize: 16.0,
+                  color: Colors.black,
+                ),
+                  children: <TextSpan>[
+                    TextSpan(
+                      text: 'terms and conditions',
+                      style: TextStyle(
+                        fontSize: 16.0,
+                        color: Colors.blue,
+                        decoration: TextDecoration.underline,
+                      ),
                     ),
-                  ),
-                ],
+                  ],
+                ),
               ),
-            ),
-          ],
+            ],
+          ),
         ),
         const SizedBox(height: 24),
         PrimaryButton(
