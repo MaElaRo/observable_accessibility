@@ -20,6 +20,7 @@ class AppointmentListPage extends StatelessWidget {
             builder: (context, state) {
               if (state is AppointmentListLoaded) {
                 return CustomScrollView(
+                  semanticChildCount: state.appointments.length,
                   slivers: <Widget>[
                     SliverList(
                       delegate: SliverChildBuilderDelegate(
