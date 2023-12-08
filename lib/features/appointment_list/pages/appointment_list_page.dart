@@ -59,6 +59,7 @@ class _AppointmentsList extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return CustomScrollView(
+      semanticChildCount: appointments.length,
       slivers: <Widget>[
         SliverList(
           delegate: SliverChildBuilderDelegate(
