@@ -20,19 +20,28 @@ class AppointmentListItem extends StatelessWidget {
       children: [
         PrimaryCard(
           onTap: onTap,
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
+          child: Row(
             children: [
-              _AppointmentNameRow(appointment),
-              const SizedBox(
-                height: 20,
+              Expanded(
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    _AppointmentNameRow(appointment),
+                    const SizedBox(
+                      height: 20,
+                    ),
+                    _AppointmentTimeSlotRow(appointment),
+                  ],
+                ),
               ),
-              _AppointmentTimeSlotRow(appointment),
               Align(
                 alignment: Alignment.bottomRight,
                 child: IconButton(
                   onPressed: onTap,
-                  icon: const Icon(Icons.delete),
+                  icon: const Icon(
+                    Icons.delete,
+                    color: Colors.red,
+                  ),
                 ),
               ),
             ],
