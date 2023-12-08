@@ -162,15 +162,18 @@ class _DateAndTimePickerState extends State<DateAndTimePicker> {
                   showDialog<AlertDialog>(
                     context: context,
                     builder: (BuildContext context) {
-                      return AlertDialog(
-                        title: const Text('Success'),
-                        content: Text('Appointment booked: ${state.code}'),
-                        actions: [
-                          TextButton(
-                            onPressed: () => _resetBookingForm(blocContext),
-                            child: const Text('OK'),
-                          ),
-                        ],
+                      return Semantics(
+                        liveRegion: true,
+                        child: AlertDialog(
+                          title: const Text('Success'),
+                          content: Text('Appointment booked: ${state.code}'),
+                          actions: [
+                            TextButton(
+                              onPressed: () => _resetBookingForm(blocContext),
+                              child: const Text('OK'),
+                            ),
+                          ],
+                        ),
                       );
                     },
                   );
