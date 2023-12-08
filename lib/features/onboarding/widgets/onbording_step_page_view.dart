@@ -1,45 +1,40 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:observable_accessibility/features/onboarding/models/onboarding_step.dart';
 
-class OnboardingPageView extends StatelessWidget {
-  const OnboardingPageView({
+class OnboardingStepPageView extends StatelessWidget {
+  const OnboardingStepPageView({
     super.key,
-    required this.svg,
-    required this.title,
-    required this.subtitle,
+    required this.onboardingStep,
   });
 
-  final String svg;
-  final String title;
-  final String subtitle;
+  final OnboardingStep onboardingStep;
 
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: const EdgeInsets.all(16.0),
+      padding: const EdgeInsets.all(16),
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          // SVG Image
           SvgPicture.asset(
-            svg,
-            height: 200.0,
+            onboardingStep.image,
+            height: 200,
           ),
-          const SizedBox(height: 20.0),
-          // Title
+          const SizedBox(height: 20),
           Text(
-            title, textAlign: TextAlign.center,
+            onboardingStep.title,
+            textAlign: TextAlign.center,
             style: const TextStyle(
-              fontSize: 24.0,
+              fontSize: 24,
               fontWeight: FontWeight.bold,
             ),
           ),
-          const SizedBox(height: 10.0),
-          // Subtitle
+          const SizedBox(height: 10),
           Text(
-            subtitle,
+            onboardingStep.subtitle,
             style: const TextStyle(
-              fontSize: 16.0,
+              fontSize: 16,
               color: Colors.grey,
             ),
             textAlign: TextAlign.center,

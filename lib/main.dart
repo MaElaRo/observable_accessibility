@@ -1,39 +1,52 @@
 import 'package:accessibility_tools/accessibility_tools.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:observable_accessibility/common/navigation/cubit/navigation_cubit.dart';
+import 'package:observable_accessibility/common/navigation/pages/main_page.dart';
 import 'package:observable_accessibility/common/services/appointment_service.dart';
-import 'package:observable_accessibility/common/services/navigation/presentation/cubit/navigation_cubit.dart';
-import 'package:observable_accessibility/common/services/navigation/presentation/screens/main_screen.dart';
 import 'package:observable_accessibility/features/appointment_list/cubit/appointment_list_cubit.dart';
-import 'package:observable_accessibility/features/appointment_schedluler/cubit/appointement_cubit.dart';
+import 'package:observable_accessibility/features/appointment_scheduler/cubit/appointment_cubit.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:provider/provider.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  final service = AppointmentService(
-    sharedPreferences: SharedPreferences.getInstance(),
-  );
+
+  final sharedPreferences = await SharedPreferences.getInstance();
 
   runApp(
     MaterialApp(
       debugShowCheckedModeBanner: false,
       builder: (context, child) => AccessibilityTools(child: child),
-      home: MultiBlocProvider(
+      home: MultiProvider(
         providers: [
-          BlocProvider(
-            create: (context) =>
-            AppointmentListCubit(appointmentService: service)
-              ..subscribeToAppointments(),
-            lazy: false,
-          ),
-          BlocProvider(
-            create: (context) => AppointmentCubit(appointmentService: service),
-          ),
-          BlocProvider(
-            create: (context) => NavigationCubit(),
+          Provider<AppointmentService>(
+            create: (context) => AppointmentService(
+              sharedPreferences: sharedPreferences,
+            ),
           ),
         ],
-        child: const MainScreen(),
+        child: MultiBlocProvider(
+          providers: [
+            BlocProvider(
+              create: (context) => AppointmentListCubit(
+                appointmentService: context.read<AppointmentService>(),
+              )..subscribeToAppointments(),
+              // We want it to subscribe to appointments right away so we use
+              // lazy here.
+              lazy: false,
+            ),
+            BlocProvider(
+              create: (context) => AppointmentCubit(
+                appointmentService: context.read<AppointmentService>(),
+              ),
+            ),
+            BlocProvider(
+              create: (context) => NavigationCubit(),
+            ),
+          ],
+          child: const MainPage(),
+        ),
       ),
     ),
   );
