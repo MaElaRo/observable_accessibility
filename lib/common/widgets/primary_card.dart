@@ -3,13 +3,11 @@ import 'package:flutter/material.dart';
 class PrimaryCard extends StatelessWidget {
   const PrimaryCard({
     required this.child,
-    this.onTap,
     this.padding,
     super.key,
   });
 
   final Widget child;
-  final VoidCallback? onTap;
   final EdgeInsets? padding;
 
   @override
@@ -29,16 +27,9 @@ class PrimaryCard extends StatelessWidget {
           ),
         ],
       ),
-      child: Material(
-        type: MaterialType.transparency,
-        child: InkWell(
-          borderRadius: borderRadius,
-          onTap: onTap,
-          child: Padding(
-            padding: padding ?? const EdgeInsets.all(16),
-            child: child,
-          ),
-        ),
+      child: Padding(
+        padding: padding ?? const EdgeInsets.all(16),
+        child: child,
       ),
     );
   }

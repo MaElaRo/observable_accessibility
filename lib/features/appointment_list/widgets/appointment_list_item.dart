@@ -16,38 +16,33 @@ class AppointmentListItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Stack(
-      children: [
-        PrimaryCard(
-          onTap: onTap,
-          child: Row(
-            children: [
-              Expanded(
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    _AppointmentNameRow(appointment),
-                    const SizedBox(
-                      height: 20,
-                    ),
-                    _AppointmentTimeSlotRow(appointment),
-                  ],
+    return PrimaryCard(
+      child: Row(
+        children: [
+          Expanded(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                _AppointmentNameRow(appointment),
+                const SizedBox(
+                  height: 20,
                 ),
-              ),
-              Align(
-                alignment: Alignment.bottomRight,
-                child: IconButton(
-                  onPressed: onTap,
-                  icon: const Icon(
-                    Icons.delete,
-                    color: Colors.red,
-                  ),
-                ),
-              ),
-            ],
+                _AppointmentTimeSlotRow(appointment),
+              ],
+            ),
           ),
-        ),
-      ],
+          Align(
+            alignment: Alignment.bottomRight,
+            child: IconButton(
+              onPressed: onTap,
+              icon: const Icon(
+                Icons.delete,
+                color: Colors.red,
+              ),
+            ),
+          ),
+        ],
+      ),
     );
   }
 }

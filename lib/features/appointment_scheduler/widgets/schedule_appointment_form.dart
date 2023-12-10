@@ -25,10 +25,18 @@ class _ScheduleAppointmentFormState extends State<ScheduleAppointmentForm> {
   TimeOfDay selectedTime = TimeOfDay.now();
   String phoneNumber = '';
 
+  final _formKey = GlobalKey<FormState>();
+
   final _dateController = TextEditingController();
   final _phoneController = TextEditingController();
   final _timeController = TextEditingController();
   final _nameController = TextEditingController();
+
+  final _dateFieldFocusNode = FocusNode();
+  final _timeFieldFocusNode = FocusNode();
+  final _phoneFieldFocusNode = FocusNode();
+  final _termsFieldFocusNode = FocusNode();
+  final _bookButtonFocusNode = FocusNode();
 
   bool _isTermsChecked = false;
 
@@ -41,87 +49,113 @@ class _ScheduleAppointmentFormState extends State<ScheduleAppointmentForm> {
     _phoneController.dispose();
     _nameController.dispose();
 
+    _dateFieldFocusNode.dispose();
+    _timeFieldFocusNode.dispose();
+    _phoneFieldFocusNode.dispose();
+    _termsFieldFocusNode.dispose();
+    _bookButtonFocusNode.dispose();
+
     super.dispose();
   }
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: <Widget>[
-        const Text(
-          'Choose your slot:',
-          style: TextStyle(
-            fontSize: 18,
-            fontWeight: FontWeight.bold,
+    return Form(
+      key: _formKey,
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: <Widget>[
+          const Text(
+            'Choose your slot:',
+            style: TextStyle(
+              fontSize: 18,
+              fontWeight: FontWeight.bold,
+            ),
           ),
-        ),
-        const SizedBox(
-          height: 16,
-        ),
-        AppointmentNameField(
-          controller: _nameController,
-        ),
-        AppointmentDateField(
-          controller: _dateController,
-          initialDate: selectedDate,
-          onDateSelected: (date) {
-            setState(() {
-              selectedDate = date;
-              _dateController.text =
-                  selectedDate.toLocal().toString().split(' ')[0];
-            });
-          },
-        ),
-        AppointmentTimeField(
-          controller: _timeController,
-          initialTime: selectedTime,
-          onTimeSelected: (time) {
-            setState(() {
-              selectedTime = TimeOfDay(hour: time.hour, minute: time.minute);
-              _timeController.text = selectedTime.format(context);
-            });
-          },
-        ),
-        AppointmentPhoneNumberField(
-          controller: _phoneController,
-          onChanged: (number) {
-            setState(() {
-              phoneNumber = number; // Store the entered phone number
-            });
-          },
-        ),
-        const SizedBox(height: 10),
-        AppointmentTermsField(
-          isChecked: _isTermsChecked,
-          onChanged: (value) {
-            setState(() {
-              _isTermsChecked = value ?? false;
-            });
-          },
-        ),
-        const SizedBox(height: 24),
-        PrimaryButton(
-          onPressed: _canBookAppointment ? _bookAppointment : null,
-          text: 'Book slot!',
-        ),
-        _BookingResultIndicator(
-          onResetBookingForm: _resetBookingForm,
-        ),
-      ],
+          const SizedBox(
+            height: 16,
+          ),
+          AppointmentNameField(
+            controller: _nameController,
+            onEditingComplete: () {
+              _dateFieldFocusNode.requestFocus();
+            },
+          ),
+          AppointmentDateField(
+            controller: _dateController,
+            focusNode: _dateFieldFocusNode,
+            initialDate: selectedDate,
+            onDateSelected: (date) {
+              setState(() {
+                selectedDate = date;
+                _dateController.text =
+                    selectedDate.toLocal().toString().split(' ')[0];
+              });
+
+              _timeFieldFocusNode.requestFocus();
+            },
+          ),
+          AppointmentTimeField(
+            controller: _timeController,
+            focusNode: _timeFieldFocusNode,
+            initialTime: selectedTime,
+            onTimeSelected: (time) {
+              setState(() {
+                selectedTime = TimeOfDay(hour: time.hour, minute: time.minute);
+                _timeController.text = selectedTime.format(context);
+              });
+
+              _phoneFieldFocusNode.requestFocus();
+            },
+          ),
+          AppointmentPhoneNumberField(
+            controller: _phoneController,
+            focusNode: _phoneFieldFocusNode,
+            onChanged: (number) {
+              setState(() {
+                phoneNumber = number; // Store the entered phone number
+              });
+
+              _termsFieldFocusNode.requestFocus();
+            },
+          ),
+          const SizedBox(height: 10),
+          AppointmentTermsField(
+            isChecked: _isTermsChecked,
+            onChanged: (value) {
+              setState(() {
+                _isTermsChecked = value ?? false;
+              });
+
+              _bookButtonFocusNode.requestFocus();
+            },
+          ),
+          const SizedBox(height: 24),
+          PrimaryButton(
+            onPressed: _canBookAppointment ? _bookAppointment : null,
+            focusNode: _bookButtonFocusNode,
+            text: 'Book slot!',
+          ),
+          _BookingResultIndicator(
+            onResetBookingForm: _resetBookingForm,
+          ),
+        ],
+      ),
     );
   }
 
   void _bookAppointment() {
-    final appointment = Appointment(
-      name: _nameController.text,
-      timeSlot: _mergeDateTimeAndTimeOfDay(selectedDate, selectedTime),
-      code: Random().nextInt(1000).toString(),
-    );
+    if (_formKey.currentState!.validate()) {
+      final appointment = Appointment(
+        name: _nameController.text,
+        timeSlot: _mergeDateTimeAndTimeOfDay(selectedDate, selectedTime),
+        code: Random().nextInt(1000).toString(),
+      );
 
-    FocusScope.of(context).unfocus();
+      FocusScope.of(context).unfocus();
 
-    context.read<AppointmentCubit>().bookAppointment(appointment);
+      context.read<AppointmentCubit>().bookAppointment(appointment);
+    }
   }
 
   DateTime _mergeDateTimeAndTimeOfDay(DateTime date, TimeOfDay time) {

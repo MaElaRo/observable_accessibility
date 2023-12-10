@@ -6,9 +6,12 @@ class AppointmentTimeField extends StatelessWidget {
     required this.controller,
     required this.initialTime,
     required this.onTimeSelected,
+    required this.focusNode,
   }) : super(key: key);
 
   final TextEditingController controller;
+
+  final FocusNode focusNode;
 
   final TimeOfDay initialTime;
 
@@ -16,16 +19,16 @@ class AppointmentTimeField extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return TextField(
+    return TextFormField(
+      onTap: () => _selectTime(context),
       controller: controller,
       readOnly: true,
-      decoration: InputDecoration(
-        labelText: 'Select Time',
-        suffixIcon: InkWell(
-          onTap: () => _selectTime(context),
-          child: const Icon(Icons.access_time),
-        ),
+      decoration: const InputDecoration(
+        labelText: 'Time',
+        hintText: 'Select time',
+        suffixIcon: Icon(Icons.access_time),
       ),
+      focusNode: focusNode,
     );
   }
 
