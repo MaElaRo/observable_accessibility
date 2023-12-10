@@ -65,15 +65,20 @@ class _AppointmentsList extends StatelessWidget {
 
               return Padding(
                 padding: const EdgeInsets.only(left: 16, top: 16, right: 16),
-                child: IndexedSemantics(
-                  index: index,
-                  child: AppointmentListItem(
-                    appointment: appointment,
-                    onTap: () =>
-                        context.read<AppointmentCubit>().removeAppointment(
-                              appointment.code,
-                            ),
-                  ),
+                child: AppointmentListItem(
+                  appointment: appointment,
+                  onTap: () {
+                    final messenger = ScaffoldMessenger.maybeOf(context);
+                    context.read<AppointmentCubit>().removeAppointment(
+                          appointment.code,
+                        );
+                    messenger?.clearSnackBars();
+                    messenger?.showSnackBar(
+                      const SnackBar(
+                        content: Text('Deleted appointment'),
+                      ),
+                    );
+                  },
                 ),
               );
             },
