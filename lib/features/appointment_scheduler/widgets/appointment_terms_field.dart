@@ -12,30 +12,37 @@ class AppointmentTermsField extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MergeSemantics(
+    return
+        // MergeSemantics around Checkbox and Text. One could also use a
+        // [CheckboxListTile]
+        MergeSemantics(
+      // Instead of Row, a Wrap. Content won't be cut off.
       child: Row(
         children: [
           Checkbox(
             value: isChecked,
             onChanged: onChanged,
           ),
-          const Text.rich(
-            TextSpan(
-              text: 'I accept the ',
-              style: TextStyle(
-                fontSize: 16.0,
-                color: Colors.black,
-              ),
-              children: <TextSpan>[
-                TextSpan(
-                  text: 'terms and conditions',
-                  style: TextStyle(
-                    fontSize: 16.0,
-                    color: Colors.blue,
-                    decoration: TextDecoration.underline,
-                  ),
+          // Text.rich instead of Richtext -> text will scale
+          const Flexible(
+            child: Text.rich(
+              TextSpan(
+                text: 'I accept the ',
+                style: TextStyle(
+                  fontSize: 20.0,
+                  color: Colors.black,
                 ),
-              ],
+                children: <TextSpan>[
+                  TextSpan(
+                    text: 'terms and conditions',
+                    style: TextStyle(
+                      fontSize: 20.0,
+                      color: Colors.blue,
+                      decoration: TextDecoration.underline,
+                    ),
+                  ),
+                ],
+              ),
             ),
           ),
         ],
