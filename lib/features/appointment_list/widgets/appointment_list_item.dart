@@ -18,33 +18,43 @@ class AppointmentListItem extends StatelessWidget {
   Widget build(BuildContext context) {
     return Stack(
       children: [
-        PrimaryCard(
-          onTap: onTap,
-          child: Row(
-            children: [
-              Expanded(
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    _AppointmentNameRow(appointment),
-                    const SizedBox(
-                      height: 20,
+        Semantics(
+          explicitChildNodes: true,
+          child: PrimaryCard(
+            child: Row(
+              children: [
+                Expanded(
+                  // Used to read the date with name
+                  child: MergeSemantics(
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        _AppointmentNameRow(appointment),
+                        const SizedBox(
+                          height: 20,
+                        ),
+                        _AppointmentTimeSlotRow(appointment),
+                      ],
                     ),
-                    _AppointmentTimeSlotRow(appointment),
-                  ],
-                ),
-              ),
-              Align(
-                alignment: Alignment.bottomRight,
-                child: IconButton(
-                  onPressed: onTap,
-                  icon: const Icon(
-                    Icons.delete,
-                    color: Colors.red,
                   ),
                 ),
-              ),
-            ],
+                Align(
+                  alignment: Alignment.bottomRight,
+                  child: SizedBox(
+                    height: 48,
+                    width: 48,
+                    child: IconButton(
+                      tooltip: 'Delete appointment',
+                      onPressed: onTap,
+                      icon: const Icon(
+                        Icons.delete,
+                        color: Colors.red,
+                      ),
+                    ),
+                  ),
+                ),
+              ],
+            ),
           ),
         ),
       ],
@@ -93,9 +103,13 @@ class _AppointmentTimeSlotRow extends StatelessWidget {
         const SizedBox(
           width: 10,
         ),
-        Text(
-          DateFormat('yyyy-MM-dd - hh:mm').format(appointment.timeSlot),
-          style: const TextStyle(color: Colors.black),
+        Semantics(
+          label: 'Appointment date: ${appointment.timeSlot.day} at '
+              '${appointment.timeSlot.hour}${appointment.timeSlot.minute}',
+          child: Text(
+            DateFormat('yyyy-MM-dd - hh:mm').format(appointment.timeSlot),
+            style: const TextStyle(color: Colors.black),
+          ),
         ),
       ],
     );
