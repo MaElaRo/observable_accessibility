@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/semantics.dart';
 import 'package:intl/intl.dart';
 import 'package:observable_accessibility/common/models/appointment.dart';
 import 'package:observable_accessibility/common/widgets/primary_card.dart';
@@ -16,48 +17,44 @@ class AppointmentListItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Stack(
-      children: [
-        Semantics(
-          explicitChildNodes: true,
-          child: PrimaryCard(
-            child: Row(
-              children: [
-                Expanded(
-                  // Used to read the date with name
-                  child: MergeSemantics(
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        _AppointmentNameRow(appointment),
-                        const SizedBox(
-                          height: 20,
-                        ),
-                        _AppointmentTimeSlotRow(appointment),
-                      ],
+    return Semantics(
+      explicitChildNodes: true,
+      child: PrimaryCard(
+        child: Row(
+          children: [
+            Expanded(
+              // Used to read the date with name
+              child: MergeSemantics(
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    _AppointmentNameRow(appointment),
+                    const SizedBox(
+                      height: 20,
                     ),
-                  ),
+                    _AppointmentTimeSlotRow(appointment),
+                  ],
                 ),
-                Align(
-                  alignment: Alignment.bottomRight,
-                  child: SizedBox(
-                    height: 48,
-                    width: 48,
-                    child: IconButton(
-                      tooltip: 'Delete appointment',
-                      onPressed: onTap,
-                      icon: const Icon(
-                        Icons.delete,
-                        color: Colors.red,
-                      ),
-                    ),
-                  ),
-                ),
-              ],
+              ),
             ),
-          ),
+            Align(
+              alignment: Alignment.bottomRight,
+              child: SizedBox(
+                height: 48,
+                width: 48,
+                child: IconButton(
+                  tooltip: 'Delete appointment',
+                  onPressed: onTap,
+                  icon: const Icon(
+                    Icons.delete,
+                    color: Colors.red,
+                  ),
+                ),
+              ),
+            ),
+          ],
         ),
-      ],
+      ),
     );
   }
 }
