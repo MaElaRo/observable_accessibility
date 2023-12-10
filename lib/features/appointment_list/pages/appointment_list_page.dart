@@ -65,12 +65,15 @@ class _AppointmentsList extends StatelessWidget {
 
               return Padding(
                 padding: const EdgeInsets.only(left: 16, top: 16, right: 16),
-                child: AppointmentListItem(
-                  appointment: appointment,
-                  onTap: () =>
-                      context.read<AppointmentCubit>().removeAppointment(
-                            appointment.code,
-                          ),
+                child: IndexedSemantics(
+                  index: index,
+                  child: AppointmentListItem(
+                    appointment: appointment,
+                    onTap: () =>
+                        context.read<AppointmentCubit>().removeAppointment(
+                              appointment.code,
+                            ),
+                  ),
                 ),
               );
             },
