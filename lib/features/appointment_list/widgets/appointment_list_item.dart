@@ -33,11 +33,12 @@ class AppointmentListItem extends StatelessWidget {
           ),
           Align(
             alignment: Alignment.bottomRight,
-            child: IconButton(
-              onPressed: onTap,
-              icon: const Icon(
+            child: GestureDetector(
+              onTap: onTap,
+              child: const Icon(
                 Icons.delete,
                 color: Colors.red,
+                size: 12,
               ),
             ),
           ),
