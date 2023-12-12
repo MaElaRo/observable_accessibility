@@ -39,14 +39,19 @@ class AppointmentListItem extends StatelessWidget {
             ),
             Align(
               alignment: Alignment.bottomRight,
-              child: SizedBox(
-                height: 48,
-                width: 48,
-                child: GestureDetector(
-                  onTap: onTap,
-                  child: const Icon(
-                    Icons.delete,
-                    color: Colors.red,
+              // Size for minimum tap area Material Design
+              // You can of course also use IconButton
+              child: Semantics(
+                label: 'Delete appointment',
+                child: SizedBox(
+                  height: 48,
+                  width: 48,
+                  child: GestureDetector(
+                    onTap: onTap,
+                    child: const Icon(
+                      Icons.delete,
+                      color: Colors.red,
+                    ),
                   ),
                 ),
               ),
