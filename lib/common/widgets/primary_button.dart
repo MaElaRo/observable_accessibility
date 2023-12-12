@@ -6,13 +6,11 @@ class PrimaryButton extends StatelessWidget {
     this.onPressed,
     this.focusNode,
     required this.text,
-    this.focusNode,
   });
 
   final VoidCallback? onPressed;
 
   final String text;
-
 
   final FocusNode? focusNode;
 

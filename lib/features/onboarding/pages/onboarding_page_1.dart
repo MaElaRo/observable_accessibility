@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:observable_accessibility/common/widgets/primary_button.dart';
 import 'package:observable_accessibility/features/onboarding/models/onboarding_step.dart';
 import 'package:observable_accessibility/features/onboarding/widgets/onbording_step_page_view.dart';
 

@@ -6,7 +6,6 @@ class AppointmentPhoneNumberField extends StatelessWidget {
     required this.controller,
     required this.focusNode,
     required this.onChanged,
-    required this.focusNode,
   }) : super(key: key);
 
   final TextEditingController controller;
@@ -32,6 +31,8 @@ class AppointmentPhoneNumberField extends StatelessWidget {
         if (value == null || value.isEmpty || value.length == 7) {
           return 'Please enter some text';
         }
+
+        return null;
       },
     );
   }
