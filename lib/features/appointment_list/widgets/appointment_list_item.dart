@@ -42,10 +42,9 @@ class AppointmentListItem extends StatelessWidget {
               child: SizedBox(
                 height: 48,
                 width: 48,
-                child: IconButton(
-                  tooltip: 'Delete appointment',
-                  onPressed: onTap,
-                  icon: const Icon(
+                child: GestureDetector(
+                  onTap: onTap,
+                  child: const Icon(
                     Icons.delete,
                     color: Colors.red,
                   ),

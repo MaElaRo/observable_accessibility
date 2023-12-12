@@ -6,6 +6,7 @@ class AppointmentPhoneNumberField extends StatelessWidget {
     required this.controller,
     required this.focusNode,
     required this.onChanged,
+    required this.focusNode,
   }) : super(key: key);
 
   final TextEditingController controller;

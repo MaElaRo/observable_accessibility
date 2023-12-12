@@ -7,6 +7,7 @@ class AppointmentDateField extends StatelessWidget {
     required this.focusNode,
     required this.initialDate,
     required this.onDateSelected,
+    required this.focusNode,
   }) : super(key: key);
 
   final TextEditingController controller;

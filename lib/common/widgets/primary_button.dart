@@ -4,12 +4,16 @@ class PrimaryButton extends StatelessWidget {
   const PrimaryButton({
     super.key,
     this.onPressed,
+    this.focusNode,
     required this.text,
     this.focusNode,
   });
 
   final VoidCallback? onPressed;
+
   final String text;
+
+
   final FocusNode? focusNode;
 
   @override
@@ -17,10 +21,7 @@ class PrimaryButton extends StatelessWidget {
     return ElevatedButton(
       onPressed: onPressed,
       focusNode: focusNode,
-      child: Text(
-        text,
-        style: TextStyle(color: Colors.grey),
-      ),
+      child: Text(text),
     );
   }
 }
