@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/semantics.dart';
 import 'package:intl/intl.dart';
 import 'package:observable_accessibility/common/models/appointment.dart';
 import 'package:observable_accessibility/common/widgets/primary_card.dart';

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:observable_accessibility/common/widgets/page_indicator.dart';
 import 'package:observable_accessibility/features/onboarding/models/onboarding_step.dart';
 import 'package:observable_accessibility/features/onboarding/widgets/onbording_step_page_view.dart';
 
@@ -31,26 +32,42 @@ class _OnboardingPageState extends State<OnboardingPage> {
         title: const Text('Tutorial'),
       ),
       body: MergeSemantics(
-        child: Semantics(
-          liveRegion: true,
-          onScrollDown: () => _setPageIndex(_pageController.page!.toInt() - 1),
-          onScrollUp: () => _setPageIndex(_pageController.page!.toInt() + 1),
-          onIncrease: () => _setPageIndex(_pageController.page!.toInt() + 1),
-          onDecrease: () => _setPageIndex(_pageController.page!.toInt() - 1),
-          child: PageView.builder(
-            controller: _pageController,
-            itemCount: OnboardingStep.values.length,
-            itemBuilder: (context, index) => OnboardingStepPageView(
-              onboardingStep: OnboardingStep.values[index],
+        child: Stack(
+          children: [
+            MergeSemantics(
+              child: Semantics(
+                onIncrease: () =>
+                    _setPageIndex(_pageController.page!.toInt() + 1),
+                onDecrease: () =>
+                    _setPageIndex(_pageController.page!.toInt() - 1),
+                child: PageView.builder(
+                  controller: _pageController,
+                  itemCount: OnboardingStep.values.length,
+                  itemBuilder: (context, index) => OnboardingStepPageView(
+                    onboardingStep: OnboardingStep.values[index],
+                  ),
+                ),
+              ),
             ),
-          ),
+            Align(
+              alignment: Alignment.bottomCenter,
+              child: Container(
+                alignment: Alignment.bottomCenter,
+                padding: const EdgeInsets.only(bottom: 32),
+                height: 50,
+                child: PageIndicator(
+                  pagesCount: OnboardingStep.values.length,
+                  controller: _pageController,
+                ),
+              ),
+            ),
+          ],
         ),
       ),
     );
   }
 
   void _setPageIndex(int index) {
-    print('fishes');
     if (index >= 0 && index < OnboardingStep.values.length) {
       _pageController.animateToPage(
         index,
