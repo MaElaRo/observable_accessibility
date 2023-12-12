@@ -38,7 +38,6 @@ class AppointmentListItem extends StatelessWidget {
               child: const Icon(
                 Icons.delete,
                 color: Colors.red,
-                size: 12,
               ),
             ),
           ),
