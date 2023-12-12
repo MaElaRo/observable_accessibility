@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:clock/clock.dart';
 
 class AppointmentDateField extends StatelessWidget {
   const AppointmentDateField({
@@ -20,6 +21,7 @@ class AppointmentDateField extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return TextFormField(
+      key: const Key('APPOINTMENT_DATE_TEXT_FIELD'),
       onTap: () => _selectDate(context),
       controller: controller,
       readOnly: true,
@@ -36,10 +38,10 @@ class AppointmentDateField extends StatelessWidget {
     final picked = await showDatePicker(
       context: context,
       initialDate: initialDate,
-      firstDate: DateTime.now(),
-      lastDate: DateTime.now().add(
-        const Duration(days: 365),
-      ),
+      firstDate: initialDate,
+      lastDate: clock.now().add(
+            const Duration(days: 365),
+          ),
     );
 
     if (picked != null) {

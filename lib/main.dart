@@ -15,9 +15,30 @@ void main() async {
   final sharedPreferences = await SharedPreferences.getInstance();
 
   runApp(
-    MaterialApp(
+    App(
+      enableAccessibilityTools: true,
+      sharedPreferences: sharedPreferences,
+    ),
+  );
+}
+
+class App extends StatelessWidget {
+  const App({
+    Key? key,
+    this.enableAccessibilityTools = false,
+    required this.sharedPreferences,
+  }) : super(key: key);
+
+  final bool enableAccessibilityTools;
+
+  final SharedPreferences sharedPreferences;
+
+  @override
+  Widget build(BuildContext context) {
+    return MaterialApp(
       debugShowCheckedModeBanner: false,
-      builder: (context, child) => AccessibilityTools(child: child),
+      builder: (context, child) =>
+          enableAccessibilityTools ? AccessibilityTools(child: child) : child!,
       home: MultiProvider(
         providers: [
           Provider<AppointmentService>(
@@ -48,6 +69,6 @@ void main() async {
           child: const MainPage(),
         ),
       ),
-    ),
-  );
+    );
+  }
 }

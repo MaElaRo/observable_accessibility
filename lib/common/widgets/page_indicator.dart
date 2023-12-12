@@ -34,7 +34,7 @@ class _PageIndicatorState extends State<PageIndicator> {
       builder: (_, value, child) {
         return Semantics(
           label:
-              '{Page ${(_currentPageIndex.value % (widget.pagesCount) + 1)} of ${widget.pagesCount}',
+              'Page ${(_currentPageIndex.value % (widget.pagesCount) + 1)} of ${widget.pagesCount}',
           child: Center(
             // We want to ignore any semantics from the custom package widget.
             child: ExcludeSemantics(

@@ -20,6 +20,7 @@ class AppointmentTermsField extends StatelessWidget {
       child: Row(
         children: [
           Checkbox(
+            key: const Key('APPOINTMENT_TERMS_CHECKBOX'),
             value: isChecked,
             onChanged: onChanged,
           ),

@@ -20,6 +20,7 @@ class AppointmentTimeField extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return TextFormField(
+      key: const Key('APPOINTMENT_TIME_TEXT_FIELD'),
       onTap: () => _selectTime(context),
       controller: controller,
       readOnly: true,
