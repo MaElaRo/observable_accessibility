@@ -11,6 +11,7 @@ import 'package:observable_accessibility/features/appointment_scheduler/widgets/
 import 'package:observable_accessibility/features/appointment_scheduler/widgets/appointment_phone_number_field.dart';
 import 'package:observable_accessibility/features/appointment_scheduler/widgets/appointment_terms_field.dart';
 import 'package:observable_accessibility/features/appointment_scheduler/widgets/appointment_time_field.dart';
+import 'package:clock/clock.dart';
 
 class ScheduleAppointmentForm extends StatefulWidget {
   const ScheduleAppointmentForm({super.key});
@@ -21,8 +22,11 @@ class ScheduleAppointmentForm extends StatefulWidget {
 }
 
 class _ScheduleAppointmentFormState extends State<ScheduleAppointmentForm> {
-  DateTime selectedDate = DateTime.now();
-  TimeOfDay selectedTime = TimeOfDay.now();
+  DateTime selectedDate = clock.now();
+  TimeOfDay selectedTime = TimeOfDay(
+    hour: clock.now().hour,
+    minute: clock.now().minute,
+  );
   String phoneNumber = '';
 
   final _formKey = GlobalKey<FormState>();

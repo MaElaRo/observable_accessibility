@@ -17,6 +17,7 @@ class AppointmentPhoneNumberField extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return TextFormField(
+      key: const Key('APPOINTMENT_PHONE_TEXT_FIELD'),
       decoration: const InputDecoration(
         labelText: 'Phone number',
         hintText: 'Enter phone number',
@@ -29,8 +30,10 @@ class AppointmentPhoneNumberField extends StatelessWidget {
       focusNode: focusNode,
       validator: (value) {
         if (value == null || value.isEmpty || value.length == 7) {
-          return 'Please enter some text';
+          return 'Please enter a valid phone number';
         }
+
+        return null;
       },
     );
   }

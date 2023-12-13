@@ -15,7 +15,23 @@ void main() async {
   final sharedPreferences = await SharedPreferences.getInstance();
 
   runApp(
-    MaterialApp(
+    App(
+      sharedPreferences: sharedPreferences,
+    ),
+  );
+}
+
+class App extends StatelessWidget {
+  const App({
+    Key? key,
+    required this.sharedPreferences,
+  }) : super(key: key);
+
+  final SharedPreferences sharedPreferences;
+
+  @override
+  Widget build(BuildContext context) {
+    return MaterialApp(
       debugShowCheckedModeBanner: false,
       builder: (context, child) => AccessibilityTools(child: child),
       home: MultiProvider(
@@ -48,6 +64,6 @@ void main() async {
           child: const MainPage(),
         ),
       ),
-    ),
-  );
+    );
+  }
 }

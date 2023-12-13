@@ -14,6 +14,7 @@ class AppointmentNameField extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return TextFormField(
+      key: const Key('APPOINTMENT_NAME_TEXT_FIELD'),
       decoration: const InputDecoration(
         labelText: 'Name',
         hintText: 'Enter name',
