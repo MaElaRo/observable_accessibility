@@ -1,8 +1,8 @@
 import 'package:flutter_test/flutter_test.dart';
 import 'package:observable_accessibility/common/navigation/models/bottom_tab.dart';
 
-import '../../../util/widget_test_helpers.dart';
-import '../../appoinment_scheduler/pages/appoinment_scheduler_page_test_helpers.dart';
+import '../../../utils/widget_test_helpers.dart';
+import '../../appointment_scheduler/pages/appointment_scheduler_page_test_helpers.dart';
 
 void main() {
   group(

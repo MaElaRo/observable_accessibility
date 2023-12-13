@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 
-import '../../../util/widget_test_helpers.dart';
+import '../../../utils/widget_test_helpers.dart';
 
 Future<void> addAppointment(WidgetTester tester) async {
   await fillOutAppointmentForm(tester);

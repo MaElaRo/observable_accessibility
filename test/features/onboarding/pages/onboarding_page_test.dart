@@ -1,7 +1,7 @@
 import 'package:flutter_test/flutter_test.dart';
 import 'package:observable_accessibility/common/navigation/models/bottom_tab.dart';
 
-import '../../../util/widget_test_helpers.dart';
+import '../../../utils/widget_test_helpers.dart';
 
 void main() {
   group(
