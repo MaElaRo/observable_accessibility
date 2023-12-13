@@ -16,7 +16,7 @@ class AppointmentTermsField extends StatelessWidget {
         // MergeSemantics around Checkbox and Text. One could also use a
         // [CheckboxListTile]
         MergeSemantics(
-      // Instead of Row, a Wrap. Content won't be cut off.
+      // Instead of Row, a Wrap or adding Flexible. Content won't be cut off.
       child: Row(
         children: [
           Checkbox(
