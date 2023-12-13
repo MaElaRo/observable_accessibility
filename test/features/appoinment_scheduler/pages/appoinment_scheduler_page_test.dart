@@ -165,6 +165,9 @@ void main() {
                 isEnabled: true,
                 isFocusable: true,
               ),
+              containsSemantics(
+                label: 'Dismiss',
+              ),
             ],
           );
         },

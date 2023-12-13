@@ -197,17 +197,15 @@ class _BookingResultIndicator extends StatelessWidget {
               await showDialog<AlertDialog>(
                 context: context,
                 builder: (BuildContext context) {
-                  return BlockSemantics(
-                    child: AlertDialog(
-                      title: const Text('Success'),
-                      content: const Text('Appointment was booked'),
-                      actions: [
-                        TextButton(
-                          onPressed: Navigator.of(context).pop,
-                          child: const Text('OK'),
-                        ),
-                      ],
-                    ),
+                  return AlertDialog(
+                    title: const Text('Success'),
+                    content: const Text('Appointment was booked'),
+                    actions: [
+                      TextButton(
+                        onPressed: Navigator.of(context).pop,
+                        child: const Text('OK'),
+                      ),
+                    ],
                   );
                 },
               );
