@@ -5,9 +5,9 @@ class AppointmentDateField extends StatelessWidget {
   const AppointmentDateField({
     Key? key,
     required this.controller,
-    required this.focusNode,
     required this.initialDate,
     required this.onDateSelected,
+    required this.focusNode,
   }) : super(key: key);
 
   final TextEditingController controller;

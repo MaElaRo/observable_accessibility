@@ -27,7 +27,6 @@ class _ScheduleAppointmentFormState extends State<ScheduleAppointmentForm> {
     hour: clock.now().hour,
     minute: clock.now().minute,
   );
-
   String phoneNumber = '';
 
   final _formKey = GlobalKey<FormState>();
