@@ -199,7 +199,7 @@ class _BookingResultIndicator extends StatelessWidget {
                 builder: (BuildContext context) {
                   return AlertDialog(
                     title: const Text('Success'),
-                    content: Text('Appointment booked: ${state.code}'),
+                    content: const Text('Appointment was booked'),
                     actions: [
                       TextButton(
                         onPressed: Navigator.of(context).pop,
