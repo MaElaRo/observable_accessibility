@@ -24,13 +24,6 @@ Future<void> pumpApp(WidgetTester tester) async {
   );
 }
 
-void checkAccessibilityTraversal(WidgetTester tester, Iterable expected) {
-  expect(
-    tester.semantics.simulatedAccessibilityTraversal(),
-    orderedEquals(expected),
-  );
-}
-
 Future<void> selectTab(WidgetTester tester, BottomTab tab) async {
   await tester.tap(find.text(tab.title));
   await tester.pump();
@@ -46,4 +39,11 @@ Future<void> enterText(
     text,
   );
   await tester.pump();
+}
+
+void checkAccessibilityTraversal(WidgetTester tester, Iterable expected) {
+  expect(
+    tester.semantics.simulatedAccessibilityTraversal(),
+    orderedEquals(expected),
+  );
 }

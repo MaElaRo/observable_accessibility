@@ -5,7 +5,7 @@ import 'appointment_scheduler_page_test_helpers.dart';
 
 void main() {
   group(
-    'Onboarding page',
+    'Appointment scheduler page',
     () {
       testWidgets(
         'should be accessible when form is empty',
