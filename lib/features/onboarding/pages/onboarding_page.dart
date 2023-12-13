@@ -51,10 +51,8 @@ class _OnboardingPageState extends State<OnboardingPage> {
             ),
             Align(
               alignment: Alignment.bottomCenter,
-              child: Container(
-                alignment: Alignment.bottomCenter,
-                padding: const EdgeInsets.only(bottom: 32),
-                height: 50,
+              child: SizedBox(
+                height: 128,
                 child: PageIndicator(
                   pagesCount: OnboardingStep.values.length,
                   controller: _pageController,
