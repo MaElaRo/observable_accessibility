@@ -16,6 +16,7 @@ void main() async {
 
   runApp(
     App(
+      enableAccessibilityTools: true,
       sharedPreferences: sharedPreferences,
     ),
   );
@@ -24,8 +25,11 @@ void main() async {
 class App extends StatelessWidget {
   const App({
     Key? key,
+    this.enableAccessibilityTools = false,
     required this.sharedPreferences,
   }) : super(key: key);
+
+  final bool enableAccessibilityTools;
 
   final SharedPreferences sharedPreferences;
 
@@ -33,7 +37,8 @@ class App extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      builder: (context, child) => AccessibilityTools(child: child),
+      builder: (context, child) =>
+          enableAccessibilityTools ? AccessibilityTools(child: child) : child!,
       home: MultiProvider(
         providers: [
           Provider<AppointmentService>(
