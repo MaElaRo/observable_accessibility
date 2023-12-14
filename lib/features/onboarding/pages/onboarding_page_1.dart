@@ -49,31 +49,34 @@ class _OnboardingPage1State extends State<OnboardingPage1> {
             ),
           ),
           // Buttons to make navigation easier.
-          Align(
-            alignment: Alignment.center,
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              crossAxisAlignment: CrossAxisAlignment.center,
-              children: [
-                if (_currentPage > 0)
-                  IconButton(
-                    tooltip: 'Go back',
-                    icon: const Icon(Icons.arrow_back),
-                    onPressed: () => _setPageIndex(
-                      _pageController.page!.toInt() - 1,
+          if (MediaQuery.of(context).accessibleNavigation)
+            Align(
+              alignment: Alignment.center,
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: [
+                  if (_currentPage > 0)
+                    IconButton(
+                      tooltip: 'Go back',
+                      icon: const Icon(Icons.arrow_back),
+                      onPressed: () => _setPageIndex(
+                        _pageController.page!.toInt() - 1,
+                      ),
+                    )
+                  else
+                    const Spacer(),
+                  if (_currentPage < OnboardingStep.values.length - 1)
+                    IconButton(
+                      tooltip: 'Go forward',
+                      icon: const Icon(Icons.arrow_forward),
+                      onPressed: () => _setPageIndex(
+                        _pageController.page!.toInt() + 1,
+                      ),
                     ),
-                  ),
-                if (_currentPage < OnboardingStep.values.length - 1)
-                  IconButton(
-                    tooltip: 'Go forward',
-                    icon: const Icon(Icons.arrow_forward),
-                    onPressed: () => _setPageIndex(
-                      _pageController.page!.toInt() + 1,
-                    ),
-                  ),
-              ],
+                ],
+              ),
             ),
-          ),
         ],
       ),
     );
