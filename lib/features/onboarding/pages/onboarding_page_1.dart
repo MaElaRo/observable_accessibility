@@ -12,10 +12,19 @@ class OnboardingPage1 extends StatefulWidget {
 class _OnboardingPage1State extends State<OnboardingPage1> {
   late PageController _pageController;
 
+  var _currentPage = 0;
+
   @override
   void initState() {
     super.initState();
+
     _pageController = PageController(initialPage: 0);
+
+    _pageController.addListener(() {
+      setState(() {
+        _currentPage = _pageController.page?.toInt() ?? 0;
+      });
+    });
   }
 
   @override
@@ -46,20 +55,21 @@ class _OnboardingPage1State extends State<OnboardingPage1> {
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
-                if (_pageController.page!.toInt() > 0)
+                if (_currentPage > 0)
                   IconButton(
                     tooltip: 'Go back',
                     icon: const Icon(Icons.arrow_back),
-                    onPressed: () =>
-                        _setPageIndex(_pageController.page!.toInt() - 1),
+                    onPressed: () => _setPageIndex(
+                      _pageController.page!.toInt() - 1,
+                    ),
                   ),
-                if (_pageController.page!.toInt() <
-                    OnboardingStep.values.length - 1)
+                if (_currentPage < OnboardingStep.values.length - 1)
                   IconButton(
                     tooltip: 'Go forward',
                     icon: const Icon(Icons.arrow_forward),
-                    onPressed: () =>
-                        _setPageIndex(_pageController.page!.toInt() + 1),
+                    onPressed: () => _setPageIndex(
+                      _pageController.page!.toInt() + 1,
+                    ),
                   ),
               ],
             ),
@@ -71,11 +81,13 @@ class _OnboardingPage1State extends State<OnboardingPage1> {
 
   void _setPageIndex(int index) {
     if (index >= 0 && index < OnboardingStep.values.length) {
-      _pageController.animateToPage(
-        index,
-        duration: const Duration(milliseconds: 500),
-        curve: Curves.easeInOut,
-      );
+      setState(() {
+        _pageController.animateToPage(
+          index,
+          duration: const Duration(milliseconds: 500),
+          curve: Curves.easeInOut,
+        );
+      });
     }
   }
 }
