@@ -104,11 +104,10 @@ class _AppointmentTimeSlotRow extends StatelessWidget {
         const SizedBox(
           width: 10,
         ),
-        // TODO: Reads appointment in a human way
         Semantics(
-          label: 'Appointment date: ${appointment.timeSlot.day} of '
-              '${appointment.timeSlot.month} at '
-              '${appointment.timeSlot.hour}:${appointment.timeSlot.minute}',
+          label:
+              'Appointment date: ${DateFormat('yyyy-MM-dd').format(appointment.timeSlot)} at '
+              '${DateFormat('hh:mm').format(appointment.timeSlot)}',
           child: ExcludeSemantics(
             child: Text(
               DateFormat('yyyy-MM-dd - hh:mm').format(appointment.timeSlot),
