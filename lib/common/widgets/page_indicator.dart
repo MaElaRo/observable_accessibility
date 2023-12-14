@@ -29,14 +29,20 @@ class _PageIndicatorState extends State<PageIndicator> {
 
   @override
   Widget build(BuildContext context) {
+    // We need to rebuild the widget tree whenever the current page changes
+    // so the label will be updated
     return ValueListenableBuilder<int>(
       valueListenable: _currentPageIndex,
       builder: (_, value, child) {
-        return Semantics(
+        return
+            // Only adding semantics will read the same thing over on over again
+            Semantics(
           label:
               'Page ${(_currentPageIndex.value % (widget.pagesCount) + 1)} of ${widget.pagesCount}',
           child: Center(
-            // We want to ignore any semantics from the custom package widget.
+            // We want to ignore any semantics from the custom package widget
+            // if we want to have our own and the one provided make no sense
+            // in our app context
             child: ExcludeSemantics(
               child: SmoothPageIndicator(
                 controller: widget.controller,

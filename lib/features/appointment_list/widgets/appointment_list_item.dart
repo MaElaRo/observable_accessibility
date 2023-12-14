@@ -16,6 +16,7 @@ class AppointmentListItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    // Explicitchildnodes so we can easily reach delete.
     return Semantics(
       explicitChildNodes: true,
       child: PrimaryCard(
@@ -103,12 +104,16 @@ class _AppointmentTimeSlotRow extends StatelessWidget {
         const SizedBox(
           width: 10,
         ),
+        // TODO: Reads appointment in a human way
         Semantics(
-          label: 'Appointment date: ${appointment.timeSlot.day} at '
-              '${appointment.timeSlot.hour}${appointment.timeSlot.minute}',
-          child: Text(
-            DateFormat('yyyy-MM-dd - hh:mm').format(appointment.timeSlot),
-            style: const TextStyle(color: Colors.black),
+          label: 'Appointment date: ${appointment.timeSlot.day} of '
+              '${appointment.timeSlot.month} at '
+              '${appointment.timeSlot.hour}:${appointment.timeSlot.minute}',
+          child: ExcludeSemantics(
+            child: Text(
+              DateFormat('yyyy-MM-dd - hh:mm').format(appointment.timeSlot),
+              style: const TextStyle(color: Colors.black),
+            ),
           ),
         ),
       ],
