@@ -31,21 +31,22 @@ class _OnboardingPageState extends State<OnboardingPage> {
       appBar: AppBar(
         title: const Text('Tutorial'),
       ),
+      // merges semantics of everything
       body: MergeSemantics(
+        // Stack to have pageview scrolling but the dots staying.
         child: Stack(
           children: [
-            MergeSemantics(
-              child: Semantics(
-                onIncrease: () =>
-                    _setPageIndex(_pageController.page!.toInt() + 1),
-                onDecrease: () =>
-                    _setPageIndex(_pageController.page!.toInt() - 1),
-                child: PageView.builder(
-                  controller: _pageController,
-                  itemCount: OnboardingStep.values.length,
-                  itemBuilder: (context, index) => OnboardingStepPageView(
-                    onboardingStep: OnboardingStep.values[index],
-                  ),
+            Semantics(
+              //  liveRegion: true,
+              onIncrease: () =>
+                  _setPageIndex(_pageController.page!.toInt() + 1),
+              onDecrease: () =>
+                  _setPageIndex(_pageController.page!.toInt() - 1),
+              child: PageView.builder(
+                controller: _pageController,
+                itemCount: OnboardingStep.values.length,
+                itemBuilder: (context, index) => OnboardingStepPageView(
+                  onboardingStep: OnboardingStep.values[index],
                 ),
               ),
             ),
